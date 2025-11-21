@@ -1,0 +1,82 @@
+[
+  {
+    "timestamp": "2023-01-01T10:00:00Z",
+    "source_ip": "192.168.1.100",
+    "destination_ip": "10.0.0.1",
+    "event_type": "login",
+    "user_id": "user123",
+    "status": "success",
+    "duration": 120,
+    "bytes_transferred": 1024
+  },
+  {
+    "timestamp": "2023-01-01T10:05:00Z",
+    "source_ip": "192.168.1.101",
+    "destination_ip": "10.0.0.2",
+    "event_type": "file_access",
+    "user_id": "user456",
+    "status": "success",
+    "duration": 45,
+    "bytes_transferred": 2048
+  },
+  {
+    "timestamp": "2023-01-01T10:10:00Z",
+    "source_ip": "192.168.1.102",
+    "destination_ip": "10.0.0.3",
+    "event_type": "network_scan",
+    "user_id": "admin",
+    "status": "warning",
+    "duration": 30,
+    "bytes_transferred": 512
+  },
+  {
+    "timestamp": "2023-01-01T10:15:00Z",
+    "source_ip": "192.168.1.103",
+    "destination_ip": "10.0.0.4",
+    "event_type": "login",
+    "user_id": "user789",
+    "status": "failed",
+    "duration": 10,
+    "bytes_transferred": 0
+  },
+  {
+    "timestamp": "2023-01-01T10:20:00Z",
+    "source_ip": "192.168.1.104",
+    "destination_ip": "10.0.0.5",
+    "event_type": "database_query",
+    "user_id": "db_admin",
+    "status": "success",
+    "duration": 200,
+    "bytes_transferred": 4096
+  },
+  {
+    "timestamp": "2023-01-01T10:25:00Z",
+    "source_ip": "192.168.1.105",
+    "destination_ip": "10.0.0.6",
+    "event_type": "file_access",
+    "user_id": "user101",
+    "status": "success",
+    "duration": 60,
+    "bytes_transferred": 1536
+  },
+  {
+    "timestamp": "2023-01-01T10:30:00Z",
+    "source_ip": "192.168.1.106",
+    "destination_ip": "10.0.0.7",
+    "event_type": "login",
+    "user_id": "user202",
+    "status": "success",
+    "duration": 90,
+    "bytes_transferred": 512
+  },
+  {
+    "timestamp": "2023-01-01T10:35:00Z",
+    "source_ip": "192.168.1.107",
+    "destination_ip": "10.0.0.8",
+    "event_type": "network_scan",
+    "user_id": "admin",
+    "status": "alert",
+    "duration": 25,
+    "bytes_transferred": 256
+  }
+]

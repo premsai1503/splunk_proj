@@ -1,0 +1,5 @@
+
+{
+  "name": "Splunk Log Analyzer Chatbot",
+  "description": "An AI-powered chatbot interface to analyze Splunk logs, generate dashboards, and create visualizations through a conversational UI. Features a connection manager for Splunk data sources and displays results, including images and text, in an interactive chat."
+}
