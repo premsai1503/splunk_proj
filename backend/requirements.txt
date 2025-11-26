@@ -6,5 +6,6 @@ matplotlib
 langchain
 flask
 flask-cors
+plotly
 langchain-core
 langchain-google-genai

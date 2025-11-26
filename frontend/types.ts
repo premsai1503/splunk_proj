@@ -3,6 +3,7 @@ export interface Message {
   sender: 'user' | 'bot';
   text?: string;
   imageUrl?: string;
+  plot?: string;
 }
 
 export interface ColumnInfo {

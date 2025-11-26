@@ -55,24 +55,26 @@ def generate():
         prompt = request.json.get('prompt')
         message = {"messages": [{"role": "user", "content": prompt}]}
 
-        # image_path = './Test_image.jpeg'  # Example image path
-        # with open(image_path, 'rb') as image_file:
-        #     encoded_string = base64.b64encode(image_file.read())
-        #     base64_image_string = encoded_string.decode('utf-8')
-
         result = analysis_agent.run_agent(message)
-        # return jsonify({
-        #     'status': 'success',
-        #     'graphs': analysis_agent._graphs[-1] if analysis_agent._graphs else None,
-        #     'data': str(result)
-        # })
-
-        base64_image_string = analysis_agent._graphs[-1] if analysis_agent._graphs else None
+        if analysis_agent._graphs[-1]['type'] == 'plotly_json':
+            plot_string = analysis_agent._graphs[-1]['data']
+            image_string = None
+        elif analysis_agent._graphs[-1]['type'] == 'image_base64':
+            plot_string = None
+            image_string = analysis_agent._graphs[-1]['data']
+        else:
+            plot_string = None
+            image_string = None
         response = {
             'status': 'success',
-            'image': base64_image_string,
+            'plot': plot_string,
+            'image': image_string,
             'text': result
         }
+
+        print("\n============================\n")
+        print("GENERATE RESPONSE:", response)
+        print("\n============================\n")
         return jsonify(response)
     except Exception as e:
         print(f"Error in /generate: {e}")
