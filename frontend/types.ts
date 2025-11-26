@@ -2,7 +2,6 @@ export interface Message {
   id: string;
   sender: 'user' | 'bot';
   text?: string;
-  imageUrl?: string;
   plot?: string;
 }
 

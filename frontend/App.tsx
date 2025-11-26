@@ -4,7 +4,7 @@ import Sidebar from './components/Sidebar';
 import ChatView from './components/ChatView';
 import ConnectionModal from './components/ConnectionModal';
 import SchemaModal from './components/SchemaModal';
-import ImageModal from './components/ImageModal';
+import PlotModal from './components/PlotModal';
 import { Message, ConnectionStatus, SchemaData } from './types';
 import { connectToSplunk, generateResponse } from './services/apiService';
 
@@ -23,7 +23,7 @@ const App: React.FC = () => {
     // Modal states
     const [isConnecting, setIsConnecting] = useState(false);
     const [isSchemaModalOpen, setIsSchemaModalOpen] = useState(false);
-    const [fullscreenImageUrl, setFullscreenImageUrl] = useState<string | null>(null);
+    const [fullscreenPlotJson, setFullscreenPlotJson] = useState<string | null>(null);
 
     const handleConnect = useCallback(async () => {
         setIsConnecting(true);
@@ -104,14 +104,14 @@ const App: React.FC = () => {
             const botData = await botResponse.json();
             const botText = botData.text;
             const botPlot = botData.plot;
-            const botImage = botData.image;
+            // const botImage = botData.image; // Removed as per request
 
             const botMessage: Message = {
                 id: `bot-${Date.now()}`,
                 sender: 'bot',
                 text: botText,
                 plot: botPlot,
-                imageUrl: `data:image/png;base64,${botImage}`
+                // imageUrl: `data:image/png;base64,${botImage}` // Removed
             };
             setMessages((prev) => [...prev, botMessage]);
         } catch (error) {
@@ -126,8 +126,8 @@ const App: React.FC = () => {
         }
     }, []);
 
-    const handleViewImage = useCallback((url: string) => {
-        setFullscreenImageUrl(url);
+    const handleViewPlot = useCallback((plotJson: string) => {
+        setFullscreenPlotJson(plotJson);
     }, []);
 
 
@@ -147,7 +147,7 @@ const App: React.FC = () => {
                     messages={messages}
                     isLoading={isLoading}
                     onSendMessage={handleSendMessage}
-                    onViewImage={handleViewImage}
+                    onViewPlot={handleViewPlot}
                     isSplunkConnected={connectionStatus === 'connected'}
                 />
             </main>
@@ -166,10 +166,10 @@ const App: React.FC = () => {
                 />
             )}
 
-            {fullscreenImageUrl && (
-                <ImageModal
-                    imageUrl={fullscreenImageUrl}
-                    onClose={() => setFullscreenImageUrl(null)}
+            {fullscreenPlotJson && (
+                <PlotModal
+                    plotJson={fullscreenPlotJson}
+                    onClose={() => setFullscreenPlotJson(null)}
                 />
             )}
         </div>

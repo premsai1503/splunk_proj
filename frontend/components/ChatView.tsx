@@ -8,7 +8,7 @@ interface ChatViewProps {
   messages: MessageType[];
   isLoading: boolean;
   onSendMessage: (text: string) => void;
-  onViewImage: (url: string) => void;
+  onViewPlot: (plotJson: string) => void;
   isSplunkConnected: boolean;
 }
 
@@ -22,7 +22,7 @@ const TypingIndicator: React.FC = () => (
 );
 
 
-const ChatView: React.FC<ChatViewProps> = ({ messages, isLoading, onSendMessage, onViewImage, isSplunkConnected }) => {
+const ChatView: React.FC<ChatViewProps> = ({ messages, isLoading, onSendMessage, onViewPlot, isSplunkConnected }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -35,7 +35,7 @@ const ChatView: React.FC<ChatViewProps> = ({ messages, isLoading, onSendMessage,
     <div className="flex-1 flex flex-col bg-slate-50 overflow-hidden">
       <div className="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
         {messages.map((msg) => (
-          <Message key={msg.id} message={msg} onViewImage={onViewImage} />
+          <Message key={msg.id} message={msg} onViewPlot={onViewPlot} />
         ))}
         {isLoading && <TypingIndicator />}
         <div ref={messagesEndRef} />

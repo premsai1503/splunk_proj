@@ -6,10 +6,10 @@ import { UserIcon, BotIcon, ExpandIcon } from './icons';
 
 interface MessageProps {
     message: MessageType;
-    onViewImage: (url: string) => void;
+    onViewPlot: (plotJson: string) => void;
 }
 
-const Message: React.FC<MessageProps> = ({ message, onViewImage }) => {
+const Message: React.FC<MessageProps> = ({ message, onViewPlot }) => {
     const isUser = message.sender === 'user';
 
     const containerClasses = `flex items-start gap-3 ${isUser ? 'justify-end' : 'justify-start'}`;
@@ -33,30 +33,21 @@ const Message: React.FC<MessageProps> = ({ message, onViewImage }) => {
             )}
             <div className={`${bubbleClasses} group relative`}>
                 {message.text && <p className="whitespace-pre-wrap">{message.text}</p>}
-                {message.imageUrl && (
-                    <div className="mt-2">
-                        <img
-                            src={message.imageUrl}
-                            alt="Generated chart"
-                            className="rounded-lg max-w-full h-auto cursor-pointer"
-                            onClick={() => onViewImage(message.imageUrl)}
-                        />
-                        <div
-                            onClick={() => onViewImage(message.imageUrl)}
-                            className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center cursor-pointer rounded-lg">
-                            <ExpandIcon className="w-10 h-10 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                        </div>
-                    </div>
-                )}
                 {plotData && (
-                    <div className="mt-2 w-full h-64">
+                    <div className="mt-2 w-full h-64 relative group/plot">
                         <Plot
                             data={plotData.data}
-                            layout={plotData.layout}
+                            layout={{ ...plotData.layout, autosize: true }}
                             config={plotData.config}
                             frames={plotData.frames}
                             useResizeHandler={true}
+                            style={{ width: "100%", height: "100%" }}
                         />
+                        <div
+                            onClick={() => onViewPlot(message.plot!)}
+                            className="absolute inset-0 bg-black bg-opacity-0 group-hover/plot:bg-opacity-10 transition-all duration-300 flex items-center justify-center cursor-pointer rounded-lg z-10 pointer-events-none group-hover/plot:pointer-events-auto">
+                            <ExpandIcon className="w-10 h-10 text-slate-700 opacity-0 group-hover/plot:opacity-100 transition-opacity duration-300 bg-white rounded-full p-2 shadow-lg" />
+                        </div>
                     </div>
                 )}
             </div>
